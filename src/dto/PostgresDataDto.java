@@ -6,16 +6,14 @@ import java.util.Date;
 public class PostgresDataDto {
 
 	private int id;
-	private String input_date;
-	private String serial;
+	private int serial;
 	private String old_discount;
 
 	public PostgresDataDto() {
 	}
 
-	public PostgresDataDto(int id, String input_date, String serial, String old_discount) {
+	public PostgresDataDto(int id, int serial, String old_discount) {
 		this.id = id;
-		this.input_date = input_date;
 		this.serial = serial;
 		this.old_discount = old_discount;
 	}
@@ -28,19 +26,11 @@ public class PostgresDataDto {
 		this.id = id;
 	}
 
-	public String getInput_date() {
-		return input_date;
-	}
-
-	public void setInput_date(String input_date) {
-		this.input_date = input_date;
-	}
-
-	public String getSerial() {
+	public int getSerial() {
 		return serial;
 	}
 
-	public void setSerial(String serial) {
+	public void setSerial(int serial) {
 		this.serial = serial;
 	}
 

@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class PostgresDataDao {
 
 			// SELECT文の準備
 
-			String sql = "select id, input_date, serial, old_discount from discount_information_s \r\n"
+			String sql = "select id, input_date, serial, old_discount from discount_information_test \r\n"
 					+ "where to_char(input_date, 'yyyy-mm-dd') = to_char(current_date, 'yyyy-mm-dd')\r\n"
 					+ "order by id desc limit 1";
 
@@ -51,11 +50,10 @@ public class PostgresDataDao {
 			while (rs.next()) {
 
 				int id = rs.getInt("id");
-				String input_date = rs.getString("input_date");
-				String serial = rs.getString("serial");
+				int serial = rs.getInt("serial");
 				String old_discount = rs.getString("old_discount");
 
-				PostgresDataDto dto = new PostgresDataDto(id, input_date, serial, old_discount);
+				PostgresDataDto dto = new PostgresDataDto(id, serial, old_discount);
 
 				postgresDataList.add(dto);
 			}
@@ -69,7 +67,7 @@ public class PostgresDataDao {
 
 				// SELECT文の準備
 
-				String sql = "select id, input_date, serial, old_discount from discount_information_s \r\n"
+				String sql = "select id, input_date, serial, old_discount from discount_information_test \r\n"
 						+ "order by id desc limit 1";
 
 				// SQL文確認
@@ -86,11 +84,10 @@ public class PostgresDataDao {
 				while (rs.next()) {
 
 					int id = rs.getInt("id");
-					String input_date = rs.getString("input_date");
-					String serial = rs.getString("serial");
+					int serial = rs.getInt("serial");
 					String old_discount = rs.getString("old_discount");
 
-					PostgresDataDto dto = new PostgresDataDto(id, input_date, serial, old_discount);
+					PostgresDataDto dto = new PostgresDataDto(id, serial, old_discount);
 
 					postgresDataList.add(dto);
 				}
