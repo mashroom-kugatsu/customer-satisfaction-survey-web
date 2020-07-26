@@ -352,7 +352,7 @@
 	</div>
 	<br>
 	<div>
-	<a href="javascript:history.back()">[読込に戻る]</a>
+	<a href="./index.jsp">[読込に戻る]</a>
 	</div>
 </body>
 </html>

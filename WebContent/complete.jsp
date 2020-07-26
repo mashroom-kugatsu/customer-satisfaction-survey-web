@@ -16,15 +16,14 @@
 <body>
 	<h3>お客様満足度調査Web入力データ 登録ツール</h3>
 	<div>
-		<a>読込＞ 確認＞ <b>完了＞</b>
-		</a>
+		<a>読込＞ 確認＞ <b>完了＞</b></a>
 	</div>
-	<p><%= msg %></p>
-
+	<br>
 	<div>
 		<a>▼以下の割引券Noで登録しました▼</a><br>
 		<%-- ID:<%=insertDataDto.getId() + 1%> --%>
-		割引券No:<%=insertDataDto.getOld_discount()%>
+		<%-- 割引券No:<%=insertDataDto.getOld_discount()%> --%>
+		<p><%= msg %></p>
 	</div>
 	<br>
 	<div>

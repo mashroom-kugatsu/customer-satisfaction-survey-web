@@ -24,7 +24,11 @@ public class InsertDataDao {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-		try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+		try {
+			Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);
+
+			// 自動コミットを解除する(トランザクション開始)
+			conn.setAutoCommit(false);
 
 			GetInsertDataLogic getInsertDataLogic = new GetInsertDataLogic();
 			List<InsertDataDto> insertDataList = getInsertDataLogic.getInsertDataList(uploadFilePath);
@@ -51,11 +55,8 @@ public class InsertDataDao {
 			int result_d = pStmt_d.executeUpdate();
 
 			String sql_questionnaite_data = "insert into questionnaire_data_test values "
-					+ "(?, ?, ?, ?, ?, ?, 	?, 	?, 	?, 	?, 	"
-					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-					+ "?, ?, ?, ?, ?, ?, ?) ";
+					+ "(?, ?, ?, ?, ?, ?, 	?, 	?, 	?, 	?, 	" + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
+					+ "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " + "?, ?, ?, ?, ?, ?, ?) ";
 			PreparedStatement pStmt_q = conn.prepareStatement(sql_questionnaite_data);
 
 			pStmt_q.setInt(1, insertDataDto.getId() + 1);
@@ -107,17 +108,18 @@ public class InsertDataDao {
 			pStmt_q.setString(47, insertDataDto.getCustomer_code());
 
 			int result_q = pStmt_q.executeUpdate();
-			
-			if(!(result_d ==1 && result_q == 1)) {
+
+			// コミット
+			conn.commit();
+
+			if (!(result_d == 1 && result_q == 1)) {
+				conn.rollback();
 				return false;
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
 		}
 		return true;
-
 	}
-
 }

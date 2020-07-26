@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.InsertDataDao;
 import dto.FilePathDto;
+import dto.InsertDataDto;
 
 /**
  * Servlet implementation class CompleteServlet
@@ -36,11 +38,17 @@ public class CompleteServlet extends HttpServlet {
 		FilePathDto filePathDto = (FilePathDto) sessionFilePath.getAttribute("filePathDto");
 		String uploadFilePath = filePathDto.getUploadFilePath();
 		
+		HttpSession session = request.getSession();	
+		List<InsertDataDto> insertDataList = (List<InsertDataDto>) session.getAttribute("insertDataList");
+		InsertDataDto insertDataDto = insertDataList.get(0);
+		String old_discount = insertDataDto.getOld_discount();
+		
+		
 		InsertDataDao insertDataDao = new InsertDataDao();
 		boolean result = insertDataDao.insertExcute(uploadFilePath);
 		if(result) {
 			System.out.println("正常に動作");
-			request.setAttribute("msg", "登録完了");
+			request.setAttribute("msg", old_discount);
 		}else {
 			System.out.println("失敗");
 			request.setAttribute("msg", "失敗");

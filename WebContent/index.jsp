@@ -17,7 +17,7 @@
 			enctype="multipart/form-data">
 			読込するファイルを選択してください
 			<p>
-				<input type="file" name="file" accept=".xlsx" size="100" style="width:300px;">
+				<input type="file" name="file" accept=".xlsx" size="100" style="width:750px;">
 			</p>
 			<p>
 				<input type="submit" value="読込">

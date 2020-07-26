@@ -54,8 +54,6 @@ public class ConfirmServlet extends HttpServlet {
 		HttpSession sessionFilePath = request.getSession();
 		sessionFilePath.setAttribute("filePathDto", filePathDto);
 
-		System.out.println(fileName);
-
 		GetInsertDataLogic getInsertDataLogic = new GetInsertDataLogic();
 		List<InsertDataDto> insertDataList = getInsertDataLogic.getInsertDataList(uploadFilePath);
 
